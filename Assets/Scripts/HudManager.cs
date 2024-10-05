@@ -24,7 +24,7 @@ public class HudManager : MonoBehaviour
     }
 
     bool active = false;
-    public RadialMenu radialMenu;
+    public Radial_UI.RadialMenu radialMenu;
     void Update()
     {
         RespondToSpaceInput();
