@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     //[SerializeField] private PlayerLadderMovement plm;
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
 
     [Header("Reset")]
     [SerializeField] private float maxTime;
@@ -71,6 +72,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Timers")]
     [Range(0.01f, 0.5f)] [SerializeField] private float jumpCoyoteTime;
     [Range(0.01f, 0.5f)] [SerializeField] private float jumpBufferTime;
+
+    [Header("Surface Aligment")]
+    [SerializeField] private float rayLength;// Longitud del raycast
+    [SerializeField] private float rotationSpeed; // Velocidad de suavizado de la rotación
+    [SerializeField] private AnimationCurve animCurve;
 
     //Input handler
     private Vector2 moveInput;
@@ -83,6 +89,10 @@ public class PlayerMovement : MonoBehaviour
         timeToReset = 0;
         maxTime = 3;
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        // Mueve el centro de masa hacia abajo para dar la sensación de que la parte inferior es más pesada
+        Vector2 newCenterOfMass = new Vector2(0, -0.5f); // Ajusta según el tamaño de tu sprite
+        rb.centerOfMass = newCenterOfMass;
         //plm = GetComponent<PlayerLadderMovement>();
         SetValues();
     }
@@ -92,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        //AlignToGround();
         #region Timer
         lastGroundedTime -= Time.deltaTime;
         lastJumpTime -= Time.deltaTime;
@@ -101,8 +112,12 @@ public class PlayerMovement : MonoBehaviour
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
 
+        if (moveInput.x < 0 && sr.flipX == false) sr.flipX = true;
+        if (moveInput.x > 0 && sr.flipX == true) sr.flipX = false;
+
         if (Input.GetButtonDown("Jump"))
         {
+            print("saltito");
             OnJump();
         }
 
@@ -145,6 +160,7 @@ public class PlayerMovement : MonoBehaviour
         //if (lastGroundedTime > 0 && lastJumpTime > 0 && !isJumping && !plm.IsLadder)
         if (lastGroundedTime > 0 && lastJumpTime > 0 && !isJumping)
             {
+            print("ejecuta salto");
             isJumping = true;
             isJumpCut = false;
             isJumpFalling = false;
@@ -202,6 +218,9 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
 
+
+
+        //LimitCarRotation();
     }
 
     private void KillPlayer()
@@ -292,11 +311,70 @@ public class PlayerMovement : MonoBehaviour
 
     private void SetValues()
     {
-        float gravityStrength = -(2 * jumpHeight) / (jumpTimeToApex * jumpTimeToApex);
+        float gravityStrength = (-(2 * jumpHeight) / (jumpTimeToApex * jumpTimeToApex))*3;
         gravityScale = gravityStrength / Physics2D.gravity.y;
         acceleration = (50 * runAcceleration) / runMaxSpeed;
         decceleration = (50 * runDecceleration) / runMaxSpeed;
         jumpForce = Mathf.Abs(gravityStrength) * jumpTimeToApex;
         rb.gravityScale = gravityScale;
     }
+
+
+    void AlignToGround()
+    {
+        // Lanza un Raycast desde la posición del personaje hacia abajo
+        //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, rayLength, groundLayer);
+
+        //if (hit.collider != null)
+        //{
+        //    // Obtiene la normal del punto de contacto
+        //    Vector2 groundNormal = hit.normal;
+
+        //    // Calcula el ángulo de la normal respecto a la horizontal
+        //    float angle = Mathf.Atan2(groundNormal.y, groundNormal.x) * Mathf.Rad2Deg;
+
+        //    // Aplica la rotación para alinear al personaje con el terreno
+        //    transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
+        //}
+
+
+        Transform cTransform;
+        cTransform = transform;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, rayLength, groundLayer);
+        if (hit.collider != null)
+        {
+            var rotation = cTransform.rotation;
+            var alignment = Quaternion.FromToRotation(transform.up, hit.normal) * rotation;
+            var inverse = Quaternion.Inverse(rotation);
+            var target = inverse * alignment;
+            // Calculate the Delta Align Rotation.
+            var delta = Quaternion.Lerp(Quaternion.identity, target, Time.deltaTime * 5);
+            transform.rotation *= delta;
+        }
+            
+    }
+    private void OnDrawGizmos()
+    {
+        // Dibuja el Raycast para visualización en la ventana de Scene
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.down * rayLength);
+    }
+    void LimitCarRotation()
+    {
+        // Limita el ángulo de rotación en el eje Z para evitar que se voltee
+        float zRotation = rb.rotation;  // Obtén la rotación actual en el eje Z
+
+        // Convierte el ángulo a un rango de -180 a 180 grados para un control más preciso
+        if (zRotation > 180)
+        {
+            zRotation -= 360;
+        }
+
+        // Restringe la rotación al rango definido (-maxTiltAngle a maxTiltAngle)
+        zRotation = Mathf.Clamp(zRotation, -45, 45);
+
+        // Aplica la rotación limitada directamente al Rigidbody2D
+        rb.rotation = zRotation;
+    }
+
 }
