@@ -43,7 +43,6 @@ namespace Radial_UI
                 radial_rings[i] = Instantiate(radial_fab, transform);
                 radial_rings[i].background.fillAmount = (1f / radialActions.Length) - (gapDegress / 360);
                 radial_rings[i].background.transform.localRotation = Quaternion.Euler(0, 0, degressPerPiece / 2f + gapDegress / 2f + i * degressPerPiece);
-                radial_rings[i].OnActive();
                 radial_rings[i].DoAnim(i == radialActions.Length-1, ActiveMenu);
 
                 Vector3 directionVector = Quaternion.AngleAxis(i * degressPerPiece, Vector3.forward) * Vector3.up;
