@@ -51,11 +51,11 @@ namespace Radial_UI
         }
         private void Update()
         {
-            if (!active) return;
-            int activeElement = GetActiveElement();
+            //if (!active) return;
+            //int activeElement = GetActiveElement();
 
-            HighLightActiveElement(activeElement);
-            RespondToMouseInput(activeElement);
+            //HighLightActiveElement(activeElement);
+            //RespondToMouseInput(activeElement);
         }
         int GetActiveElement()
         {
@@ -68,14 +68,15 @@ namespace Radial_UI
             float normalizedMouseAngle = NormalizeAngle(mouseAngle);
             return (int)(normalizedMouseAngle / degressPerPiece);
         }
-        void RespondToMouseInput(int activeElement)
+        public void RespondToMouseInput(int activeElement)
         {
-            
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (radialActions[activeElement] != null)
-                    radialActions[activeElement].Do();
-            }
+            if (radialActions[activeElement] != null)
+                radialActions[activeElement].Do();
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    if (radialActions[activeElement] != null)
+            //        radialActions[activeElement].Do();
+            //}
         }
 
         void HighLightActiveElement(int activeElement)

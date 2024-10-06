@@ -21,14 +21,14 @@ namespace Radial_UI
         }
         void CloseAll()
         {
-            bg_selected.gameObject.SetActive(false);
-            icon_selected.gameObject.SetActive(false);
+            //bg_selected.gameObject.SetActive(false);
+            //icon_selected.gameObject.SetActive(false);
 
-            bg_standar.gameObject.SetActive(false);
-            icon_standar.gameObject.SetActive(false);
+            //bg_standar.gameObject.SetActive(false);
+            //icon_standar.gameObject.SetActive(false);
 
-            bg_blocked.gameObject.SetActive(false);
-            icon_blocked.gameObject.SetActive(false);
+            //bg_blocked.gameObject.SetActive(false);
+            //icon_blocked.gameObject.SetActive(false);
         }
         public void OnActive()
         {
