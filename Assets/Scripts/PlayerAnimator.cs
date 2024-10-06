@@ -9,6 +9,9 @@ public class PlayerAnimator : MonoBehaviour
     public AnimationReferenceAsset idle;
     public AnimationReferenceAsset run;
     public AnimationReferenceAsset jump;
+    public AnimationReferenceAsset activate;
+    public AnimationReferenceAsset deactivate;
+
     public string currentState;
     public string currentAnimation;
 
@@ -16,34 +19,48 @@ public class PlayerAnimator : MonoBehaviour
     private Vector2 moveInput;
 
     public bool air;
+
+    [SerializeField] private bool changeShape;
     // Start is called before the first frame update
     void Start()
     {
+        changeShape = true;
         pm = transform.parent.GetComponent<PlayerMovement>();
         currentState = "Idle";
         SetCharacterState(currentState);
-        
+
+        var firstTrackEntry = skeletonAnimation.state.SetAnimation(0, activate, false);
+
+        // Registrar un callback para que al terminar la primera animación se reproduzca la segunda
+        firstTrackEntry.Complete += (trackEntry) =>
+        {
+            changeShape = false;
+            SetCharacterState(currentState);
+        };
+
     }
 
     // Update is called once per frame
     void Update()
     {
         moveInput.x = Input.GetAxisRaw("Horizontal");
-        
-        if (!pm.Grounded && !air)
+        if (!changeShape)
         {
-            SetCharacterState("Jump");
-        }
-        else
-        {
-            if (Mathf.Abs(moveInput.x) > 0.01f)
+            if (!pm.Grounded && !air)
             {
-
-                SetCharacterState("Run");
+                SetCharacterState("Jump");
             }
             else
             {
-                SetCharacterState("Idle");
+                if (Mathf.Abs(moveInput.x) > 0.01f)
+                {
+
+                    SetCharacterState("Run");
+                }
+                else
+                {
+                    SetCharacterState("Idle");
+                }
             }
         }
     }

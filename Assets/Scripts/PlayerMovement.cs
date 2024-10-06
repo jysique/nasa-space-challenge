@@ -80,9 +80,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Shape")]
     [SerializeField] private int playerShape = 0;
-    public Sprite air;
-    public Sprite earth;
-    public Sprite water;
+    public string PlayerShape = "Earth";
+    public GameObject earthShape;
+    public GameObject airShape;
 
     private int playerMaxShapes = 2;
 
@@ -394,11 +394,17 @@ public class PlayerMovement : MonoBehaviour
         decceleration = (50 * runDecceleration) / runMaxSpeed;
         jumpForce = Mathf.Abs(gravityStrength) * jumpTimeToApex;
         rb.gravityScale = gravityScale;
+        PlayerShape = "Earth";
+        airShape.SetActive(false);
+        earthShape.SetActive(true);
     }
     private void SetAirValues()
     {
         rb.velocity = Vector2.zero;
         rb.gravityScale = .02f;
+        PlayerShape = "Air";
+        earthShape.SetActive(false);
+        airShape.SetActive(true);
         //sr.sprite = air;
     }
 
