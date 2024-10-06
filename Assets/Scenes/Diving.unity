@@ -280,7 +280,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 470047958}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.73, y: -4.97, z: 0}
+  m_LocalPosition: {x: 13.77, y: -4.97, z: 0}
   m_LocalScale: {x: 15.5838, y: 3.42, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -421,7 +421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 487827722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.4500003, y: -1.6467358, z: 0}
+  m_LocalPosition: {x: 12.490001, y: -1.6467358, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -455,7 +455,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554777380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.45, y: 1.37, z: 0}
+  m_LocalPosition: {x: -7.42, y: 2.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368544fc7f5911c4b8c8a707c14e2ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterSpeed: 5
+  waterSpeed: 2
   isInWater: 0
   rotationSpeed: 100
   maxRotationZ: 45
@@ -533,7 +533,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &941993829
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,8 +973,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662742669}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.27, y: -4.836, z: 0}
-  m_LocalScale: {x: 2.1360881, y: 0.611676, z: 1}
+  m_LocalPosition: {x: -2.2712, y: -4.836, z: 0}
+  m_LocalScale: {x: 3.2107542, y: 0.611676, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -993,7 +993,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.10842788, y: -0.091225624}
+  m_Offset: {x: -0.033646822, y: -6.226249}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1004,7 +1004,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.903144, y: 4.49259}
+  m_Size: {x: 5.0527062, y: 16.762638}
   m_EdgeRadius: 0
 --- !u!1 &1836472760
 GameObject:
