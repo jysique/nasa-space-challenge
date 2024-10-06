@@ -8,12 +8,23 @@ public class CameraFollow : MonoBehaviour
 
     private Vector3 velocity = Vector3.zero; // Velocidad actual de la cámara (utilizada por SmoothDamp)
 
+    // Límites de la cámara
+    public Vector2 minLimits; // Límite mínimo de la cámara (X e Y)
+    public Vector2 maxLimits; // Límite máximo de la cámara (X e Y)
+
     void LateUpdate()
     {
-        // La posición deseada es la del jugador más el offset
+        // Calculamos la posición objetivo del jugador más el offset
         Vector3 targetPosition = new Vector3(player.position.x + offset.x, player.position.y + offset.y, transform.position.z);
 
         // Usamos SmoothDamp para suavizar el movimiento de la cámara
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+        Vector3 smoothPosition = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+
+        // Aplicamos los límites a la posición suavizada
+        smoothPosition.x = Mathf.Clamp(smoothPosition.x, minLimits.x, maxLimits.x);
+        smoothPosition.y = Mathf.Clamp(smoothPosition.y, minLimits.y, maxLimits.y);
+
+        // Asignamos la nueva posición con los límites aplicados
+        transform.position = smoothPosition;
     }
 }

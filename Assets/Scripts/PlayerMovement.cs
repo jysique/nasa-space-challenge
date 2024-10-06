@@ -78,6 +78,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed; // Velocidad de suavizado de la rotación
     [SerializeField] private AnimationCurve animCurve;
 
+    [Header("Shape")]
+    [SerializeField] private int playerShape = 0;
+    public Sprite air;
+    public Sprite earth;
+    public Sprite water;
+
+    private int playerMaxShapes = 2;
+
+
     //Input handler
     private Vector2 moveInput;
 
@@ -89,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         timeToReset = 0;
         maxTime = 3;
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponent<SpriteRenderer>();
+        //sr = GetComponent<SpriteRenderer>();
         // Mueve el centro de masa hacia abajo para dar la sensación de que la parte inferior es más pesada
         Vector2 newCenterOfMass = new Vector2(0, -0.5f); // Ajusta según el tamaño de tu sprite
         rb.centerOfMass = newCenterOfMass;
@@ -97,6 +106,12 @@ public class PlayerMovement : MonoBehaviour
         SetValues();
     }
 
+
+    bool getFlipX()
+    {
+        if (transform.localScale.x > 0) return true;
+        else return false;
+    }
 
 
 
@@ -112,8 +127,8 @@ public class PlayerMovement : MonoBehaviour
         moveInput.x = Input.GetAxisRaw("Horizontal");
         moveInput.y = Input.GetAxisRaw("Vertical");
 
-        if (moveInput.x < 0 && sr.flipX == false) sr.flipX = true;
-        if (moveInput.x > 0 && sr.flipX == true) sr.flipX = false;
+        if (moveInput.x < 0 && getFlipX()) transform.localScale = new Vector3(Math.Abs(transform.localScale.x)*-1, transform.localScale.y, transform.localScale.z);
+        if (moveInput.x > 0 && !getFlipX()) transform.localScale = new Vector3(Math.Abs(transform.localScale.x) , transform.localScale.y, transform.localScale.z);
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -128,7 +143,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            KillPlayer();
+            ChangeShape();
+            //KillPlayer();
         }
         #endregion
 
@@ -141,6 +157,47 @@ public class PlayerMovement : MonoBehaviour
         }
         else { Grounded = false; }
         #endregion
+
+        switch (playerShape)
+        {
+            case 0:
+                EarthController();
+                break;
+            case 1:
+                AirController();
+                break;
+
+
+
+        }
+        
+        
+
+        //LimitCarRotation();
+    }
+
+    private void ChangeShape()
+    {
+        playerShape++;
+        if (playerShape >= playerMaxShapes)
+        {
+            playerShape = 0;
+        }
+        switch (playerShape)
+        {
+            case 0:
+                SetValues();
+                break;
+            case 1:
+                SetAirValues();
+                break;
+
+
+
+        }
+    }
+    private void EarthController()
+    {
 
 
         #region Jump
@@ -159,7 +216,7 @@ public class PlayerMovement : MonoBehaviour
 
         //if (lastGroundedTime > 0 && lastJumpTime > 0 && !isJumping && !plm.IsLadder)
         if (lastGroundedTime > 0 && lastJumpTime > 0 && !isJumping)
-            {
+        {
             print("ejecuta salto");
             isJumping = true;
             isJumpCut = false;
@@ -219,10 +276,13 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-
-        //LimitCarRotation();
     }
 
+
+    private void AirController()
+    {
+        
+    }
     private void KillPlayer()
     {
         //LevelManager.instance.ResetLevel();
@@ -234,7 +294,7 @@ public class PlayerMovement : MonoBehaviour
         #region Movement
 
         //if (!plm.IsClimbing)
-        if (true)
+        if (!(playerShape==1&&grounded))
         {
             float targetSpeed = moveInput.x * runMaxSpeed;
             //print("target speed: " + targetSpeed);
@@ -267,6 +327,14 @@ public class PlayerMovement : MonoBehaviour
 
             float movement = speedDif * accelRate;
             //print(movement);
+            if(playerShape == 1)
+            {
+                if (grounded)
+                {
+                    movement = 0;
+                    print("no move");
+                }
+            }
 
 
             rb.AddForce(movement * Vector2.right, ForceMode2D.Force);
@@ -311,6 +379,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void SetValues()
     {
+        //sr.sprite = earth;
         float gravityStrength = (-(2 * jumpHeight) / (jumpTimeToApex * jumpTimeToApex))*3;
         gravityScale = gravityStrength / Physics2D.gravity.y;
         acceleration = (50 * runAcceleration) / runMaxSpeed;
@@ -318,41 +387,12 @@ public class PlayerMovement : MonoBehaviour
         jumpForce = Mathf.Abs(gravityStrength) * jumpTimeToApex;
         rb.gravityScale = gravityScale;
     }
-
-
-    void AlignToGround()
+    private void SetAirValues()
     {
-        // Lanza un Raycast desde la posición del personaje hacia abajo
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, rayLength, groundLayer);
-
-        //if (hit.collider != null)
-        //{
-        //    // Obtiene la normal del punto de contacto
-        //    Vector2 groundNormal = hit.normal;
-
-        //    // Calcula el ángulo de la normal respecto a la horizontal
-        //    float angle = Mathf.Atan2(groundNormal.y, groundNormal.x) * Mathf.Rad2Deg;
-
-        //    // Aplica la rotación para alinear al personaje con el terreno
-        //    transform.rotation = Quaternion.Euler(0, 0, angle - 90f);
-        //}
-
-
-        Transform cTransform;
-        cTransform = transform;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, rayLength, groundLayer);
-        if (hit.collider != null)
-        {
-            var rotation = cTransform.rotation;
-            var alignment = Quaternion.FromToRotation(transform.up, hit.normal) * rotation;
-            var inverse = Quaternion.Inverse(rotation);
-            var target = inverse * alignment;
-            // Calculate the Delta Align Rotation.
-            var delta = Quaternion.Lerp(Quaternion.identity, target, Time.deltaTime * 5);
-            transform.rotation *= delta;
-        }
-            
+        rb.gravityScale = .08f;
+        //sr.sprite = air;
     }
+
     private void OnDrawGizmos()
     {
         // Dibuja el Raycast para visualización en la ventana de Scene
