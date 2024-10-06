@@ -15,23 +15,22 @@ public class PlanetOrbit : MonoBehaviour
         orbitRadius = radius;
         orbitAngle = angle;
         orbitSpeed = Random.Range(0.1f, 0.5f); // Velocidad aleatoria para cada planeta
+
+        Vector3 orbitPosition = new Vector3(
+            starTransform.position.x + Mathf.Cos(orbitAngle * Mathf.Deg2Rad) * orbitRadius,
+            starTransform.position.y + Mathf.Sin(orbitAngle * Mathf.Deg2Rad) * orbitRadius,
+            0);
+
+        transform.position = orbitPosition;
+
     }
 
     void Update()
     {
         // Incrementar el ángulo para mover el planeta a lo largo de su órbita
-        orbitAngle += orbitSpeed * Time.deltaTime;
+        //orbitAngle += orbitSpeed * Time.deltaTime;
 
         // Calcular la nueva posición del planeta
-        Vector3 orbitPosition = Vector3.zero;
-        if (starTransform != null)
-        {
-            orbitPosition = new Vector3(
-            starTransform.position.x + Mathf.Cos(orbitAngle * Mathf.Deg2Rad) * orbitRadius,
-            starTransform.position.y + Mathf.Sin(orbitAngle * Mathf.Deg2Rad) * orbitRadius,
-            0);
-        }
-            
-        transform.position = orbitPosition;
+
     }
 }

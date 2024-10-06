@@ -4935,6 +4935,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1 &1286456483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1286456485}
+  - component: {fileID: 1286456484}
+  m_Layer: 0
+  m_Name: Occlusion Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!192 &1286456484
+OcclusionArea:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286456483}
+  serializedVersion: 2
+  m_Size: {x: 70.842545, y: 39.078915, z: 1}
+  m_Center: {x: 0.19157505, y: 0.31148386, z: 0}
+  m_IsViewVolume: 1
+--- !u!4 &1286456485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286456483}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1559473064
 GameObject:
   m_ObjectHideFlags: 0
@@ -9884,7 +9927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetPrefab: {fileID: 584487589832562683, guid: 1c44040e4c998d94d9011e2df07d72a4, type: 3}
   starPrefab: {fileID: 584487589832562683, guid: 2c7c62d8472bc6e4a98c1cf6799732e8, type: 3}
-  numberOfSystems: 5
+  numberOfSystems: 40
   planetsPerSystem: 5
   galaxySize: {x: 20, y: 20}
 --- !u!1 &1823557616
