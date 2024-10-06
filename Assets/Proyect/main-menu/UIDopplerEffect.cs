@@ -25,7 +25,8 @@ public class UIDopplerEffect : MonoBehaviour
         targetImage.transform.DOScale(scale, duration / 2f).SetEase(Ease.OutQuad).OnComplete(() =>
         {
             in_doppler = false;
-            gameObject.SetActive(false);
+            if(inside)
+                gameObject.SetActive(false);
             //targetImage.transform.DOScale(1f, duration / 2f).SetEase(Ease.InQuad);
         });
     }
