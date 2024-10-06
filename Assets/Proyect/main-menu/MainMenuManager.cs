@@ -1,41 +1,130 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
-    
-    public UIDopplerEffect[] effect;
-    public ParticleOrbit[] particleOrbits;
-    public float minDelay = 0.5f; // Tiempo mínimo de espera entre efectos
-    public float maxDelay = 2f; // Tiempo máximo de espera entre efectos
-    public CanvasGroup cg_panel_1;
+    //FIRST PANEL
+    public const string MENU = "menu";
+    public const string QUIT = "quit";
 
-    private void Update()
+    //SECOND PANEL
+    public const string CREDTIS = "credits";
+    public const string PLAY = "play";
+    public const string BACK = "back";
+
+    public static MainMenuManager instance;
+    void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (instance == null)
         {
-            Animation1();
+            instance = this;
+            main_cg = GetComponent<CanvasGroup>();
         }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
     }
 
-    public void Animation1()
+    CanvasGroup main_cg;
+    public UIPanel mainPanel;
+    public UIPanel menuPanel;
+
+    
+    public void OnClick(string id)
     {
-        foreach (ParticleOrbit item in particleOrbits)
+        switch (id)
         {
-            
+
+            case MENU:
+                OnMenu(); break;
+            case QUIT:
+                OnQuit();break;
+            case CREDTIS:
+                OnCredits(); break;
+            case PLAY:
+                OnPlay();break;
+            case BACK:
+                OnBack();break;
         }
-
-        foreach (var item in effect)
+    }
+    void OnMenu()
+    {
+        mainPanel.InitExit();
+        menuPanel.InitEnter();
+        SetActiveTxt(false);
+        mainPanel.OnExit(() =>
         {
-            float initialDelay = Random.Range(minDelay, maxDelay);
-
-            DOVirtual.DelayedCall(initialDelay, () =>
+            mainPanel.gameObject.SetActive(false);
+            menuPanel.OnEnter(null);
+        });
+    }
+    void OnQuit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        // Si estamos en una aplicación compilada, la cerramos
+        Application.Quit();
+#endif
+    }
+    void OnPlay()
+    {
+        main_cg.DOFade(0, 0.3f).OnComplete(() =>
+        {
+            this.gameObject.SetActive(false);
+        });
+        
+    }
+    void OnBack()
+    {
+        mainPanel.InitEnter();
+        menuPanel.InitExit();
+        mainPanel.gameObject.SetActive(true);
+        menuPanel.OnExit(() =>
+        {
+            mainPanel.OnEnter(null);
+        });
+    }
+    void OnCredits()
+    {
+        Debug.Log(" on credtis");
+    }
+    // animation
+    
+    public CanvasGroup[] cg_texts;
+    CanvasGroup current_cg;
+    float time_btns = 0.2f;
+    public void ActivateTxtBtns(int index)
+    {
+        if (current_cg != null)
+        {
+            current_cg.DOFade(0, time_btns).OnComplete(() =>
             {
-                item.StartDopplerEffect(true);
-                cg_panel_1.DOFade(0f, 0.3f);
+                SetActiveTxt(false);
+                current_cg = cg_texts[index];
+                current_cg.gameObject.SetActive(true);
+                current_cg.DOFade(1, time_btns);
+
             });
         }
+        else
+        {
+            SetActiveTxt(false);
+
+            current_cg = cg_texts[index];
+            current_cg.gameObject.SetActive(true);
+            current_cg.DOFade(1, time_btns);
+        }
+
     }
+    void SetActiveTxt(bool active)
+    {
+        foreach (CanvasGroup cg in cg_texts)
+        {
+            cg.gameObject.SetActive(active);
+        }
+    }
+
 }
