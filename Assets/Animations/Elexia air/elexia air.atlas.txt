@@ -1,0 +1,27 @@
+elexia air.png
+size:1027,540
+filter:Linear,Linear
+pma:true
+EYE Copy
+bounds:620,3,43,50
+antenna Copy
+bounds:1007,171,104,18
+rotate:90
+balloon Copy
+bounds:2,5,554,533
+body Copy
+bounds:558,352,333,186
+ear circle Copy
+bounds:558,2,60,51
+head Copy
+bounds:558,55,202,88
+neck Copy
+bounds:800,304,46,77
+rotate:90
+panel back
+bounds:558,145,240,205
+panel front
+bounds:800,35,240,205
+rotate:90
+rope
+bounds:893,277,129,261

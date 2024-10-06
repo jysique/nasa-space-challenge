@@ -103,7 +103,15 @@ public class PlayerMovement : MonoBehaviour
         Vector2 newCenterOfMass = new Vector2(0, -0.5f); // Ajusta según el tamaño de tu sprite
         rb.centerOfMass = newCenterOfMass;
         //plm = GetComponent<PlayerLadderMovement>();
-        SetValues();
+        if(playerShape == 0)
+        {
+            SetValues();
+        }
+        else
+        {
+            SetAirValues();
+        }
+        
     }
 
 
@@ -389,7 +397,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void SetAirValues()
     {
-        rb.gravityScale = .08f;
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = .02f;
         //sr.sprite = air;
     }
 

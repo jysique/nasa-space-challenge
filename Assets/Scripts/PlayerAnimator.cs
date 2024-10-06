@@ -14,10 +14,12 @@ public class PlayerAnimator : MonoBehaviour
 
     private PlayerMovement pm;
     private Vector2 moveInput;
+
+    public bool air;
     // Start is called before the first frame update
     void Start()
     {
-        pm = GetComponent<PlayerMovement>();
+        pm = transform.parent.GetComponent<PlayerMovement>();
         currentState = "Idle";
         SetCharacterState(currentState);
         
@@ -28,7 +30,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         moveInput.x = Input.GetAxisRaw("Horizontal");
         
-        if (!pm.Grounded)
+        if (!pm.Grounded && !air)
         {
             SetCharacterState("Jump");
         }
