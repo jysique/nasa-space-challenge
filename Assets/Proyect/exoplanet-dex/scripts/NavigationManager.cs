@@ -52,11 +52,6 @@ public class NavigationManager : MonoBehaviour
             Camera.main.transform.Translate(-h, -v, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Camera.main.transform.Translate(0,0, 0);
-        }
-
         if (Input.GetMouseButtonDown(0))
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

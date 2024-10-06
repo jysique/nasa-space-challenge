@@ -25,9 +25,9 @@ public class GalaxySpawner : MonoBehaviour
                 Random.Range(-galaxySize.y / 2, galaxySize.y / 2),
                 0);
 
-
-            GameObject star = Instantiate(starPrefab, systemPosition, Quaternion.identity);
-
+            Debug.Log(i + " - " + systemPosition);
+            GameObject star = Instantiate(starPrefab);
+            star.transform.position = systemPosition;
             for (int j = 0; j < planetsPerSystem; j++)
             {
                 float orbitRadius = Random.Range(minOrbitRadius, maxOrbitRadius); 
@@ -38,9 +38,9 @@ public class GalaxySpawner : MonoBehaviour
                     systemPosition.y + Mathf.Sin(orbitAngle * Mathf.Deg2Rad) * orbitRadius,
                     0);
 
-                GameObject planet = Instantiate(planetPrefab, planetPosition, Quaternion.identity);
-
-                planet.GetComponent<PlanetOrbit>().InitializeOrbit(star.transform, orbitRadius, orbitAngle);
+                GameObject planet = Instantiate(planetPrefab);
+                planet.transform.position = planetPosition;
+             //   planet.GetComponent<PlanetOrbit>().InitializeOrbit(star.transform, orbitRadius, orbitAngle);
             }
         }
     }

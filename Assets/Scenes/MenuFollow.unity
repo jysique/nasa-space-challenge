@@ -291,11 +291,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1452345035 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7146454497927529949, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
-  m_PrefabInstance: {fileID: 7146454498840904470}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1452345036 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7146454497927529946, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
@@ -306,24 +301,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7146454497927529947, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
   m_PrefabInstance: {fileID: 7146454498840904470}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452345035}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21b538240d4a5a243a68e7060f5b30d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!225 &1452345039
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1452345035}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &1514155921
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,13 +497,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1608273424}
     m_Modifications:
-    - target: {fileID: 7146454497927529944, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
-      propertyPath: gap.x
-      value: -60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7146454497927529944, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
-      propertyPath: gap.y
-      value: -20
+    - target: {fileID: 3379588360594094050, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7146454497927529944, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
       propertyPath: target
@@ -614,25 +593,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7146454497927529947, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
-      propertyPath: radialActions.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7146454497927529947, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
-      propertyPath: radialActions.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 80e3cc377eff22749a779ebf54a96bf7, type: 2}
-    - target: {fileID: 7146454497927529947, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
-      propertyPath: radialActions.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 88998e13ccfa58a488d3cc5fb982a65c, type: 2}
-    - target: {fileID: 7146454497927529947, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
-      propertyPath: radialActions.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 88998e13ccfa58a488d3cc5fb982a65c, type: 2}
     - target: {fileID: 7146454497927529949, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
       propertyPath: m_Name
       value: RadialMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 7216614746055287673, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8586239325797027167, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
