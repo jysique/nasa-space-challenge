@@ -34,31 +34,7 @@ public class MainMenuManager : MonoBehaviour
     {
 
     }
-    //public void Animation1()
-    //{
-    //    foreach (ParticleOrbit item in particleOrbits)
-    //    {
-    //        item.gameObject.SetActive(false);
-    //    }
-    //    int index = 0;
-    //    foreach (var item in effect)
-    //    {
-            
-    //        float initialDelay = Random.Range(minDelay, maxDelay);
-    //        if (index == 0) initialDelay = 0f;
-    //        index++;
-    //        DOVirtual.DelayedCall(initialDelay, () =>
-    //        {
-    //            item.StartDopplerEffect(true);
-    //            cg_main_sub_panel.DOFade(0f, 0.3f).OnComplete(() =>
-    //            {
-    //                cg_main_panel.DOFade(0f, 0.3f);
-    //                cg_main_panel.interactable = false;
-    //            });
-               
-    //        });
-    //    }
-    //}
+    float general_delay;
     void StartDoppler(ParticleOrbit[] po,UIDopplerEffect[] e, bool inside, System.Action onCompleted)
     {
         int index = 0;
@@ -69,18 +45,22 @@ public class MainMenuManager : MonoBehaviour
                 item.gameObject.SetActive(false);
             }
         }
-
+        general_delay = 0;
         foreach (var item in e)
         {
 
             float initialDelay = Random.Range(minDelay, maxDelay);
+            
             if (index == 0) initialDelay = 0f;
-            index++;
-            DOVirtual.DelayedCall(initialDelay, () =>
+            general_delay += initialDelay;
+            DOVirtual.DelayedCall(general_delay, () =>
             {
                 item.StartDopplerEffect(inside);
-                onCompleted?.Invoke();
+                if (index == e.Length-1)
+                    onCompleted?.Invoke();
+                index++;
             });
+            
         }
     }
     void OnCompletedDoppler1()

@@ -9,6 +9,8 @@ public class ParticleOrbit : MonoBehaviour
     public float radius = 100f;
     public float startAngle = 0;
     public bool hack;
+    public bool hack1;
+    public bool hack2;
     private float angle;
 
     void Start()
@@ -36,6 +38,21 @@ public class ParticleOrbit : MonoBehaviour
             }
         }
 
+        if (hack1)
+        {
+            if (angle > 310)
+            {
+                angle = 51;
+            }
+        }
+        if (hack2)
+        {
+            // 0
+            if (angle > 200)
+            {
+                angle = 100;
+            }
+        }
         UpdatePosition();
     }
 
