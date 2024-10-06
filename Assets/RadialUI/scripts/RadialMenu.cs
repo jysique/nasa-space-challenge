@@ -18,43 +18,27 @@ namespace Radial_UI
     public class RadialMenu : MonoBehaviour
     {
         public RadialAction[] radialActions;
-        public RingPiece radial_fab;
+        
         public RingPiece[] radial_rings;
 
         private float degressPerPiece;
         private float gapDegress = 1f;
+
         public float radius { get; private set; }
-        CanvasGroup cg;
+        //CanvasGroup cg;
         bool active;
         private void Awake()
         {
-            cg = GetComponent<CanvasGroup>();
+            //cg = GetComponent<CanvasGroup>();
         }
         private void Start()
         {
 
-            degressPerPiece = 360f / radialActions.Length;
-
-            float distanceToIcon = Vector3.Distance(radial_fab.icon.transform.position, radial_fab.background.transform.position);
-            
-            radial_rings = new RingPiece[radialActions.Length];
-            for (int i = 0; i < radialActions.Length; i++)
-            {
-                radial_rings[i] = Instantiate(radial_fab, transform);
-                radial_rings[i].background.fillAmount = (1f / radialActions.Length) - (gapDegress / 360);
-                radial_rings[i].background.transform.localRotation = Quaternion.Euler(0, 0, degressPerPiece / 2f + gapDegress / 2f + i * degressPerPiece);
-                radial_rings[i].DoAnim(i == radialActions.Length-1, ActiveMenu);
-
-                Vector3 directionVector = Quaternion.AngleAxis(i * degressPerPiece, Vector3.forward) * Vector3.up;
-                Vector3 movementVector = directionVector * distanceToIcon * 2;
-
-                //  radius = Vector3.Distance(this.transform.position, movementVector);
-                radial_rings[i].icon.transform.localPosition = radial_rings[i].background.transform.localPosition + movementVector;
-            }
         }
         
         public void Anim() {
-            cg.interactable = false;
+            
+            //cg.interactable = false;
             for (int i = 0; i < radial_rings.Length; i++)
             {
                 radial_rings[i].DoAnim(i == radialActions.Length - 1,ActiveMenu);
@@ -63,7 +47,7 @@ namespace Radial_UI
         void ActiveMenu()
         {
             active = true;
-            cg.interactable = true;
+            //cg.interactable = true;
         }
         private void Update()
         {
@@ -75,6 +59,7 @@ namespace Radial_UI
         }
         int GetActiveElement()
         {
+            degressPerPiece = 360 / radial_rings.Length;
             //Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2);
             Vector3 screenCenter = this.transform.position;
             Vector3 cursosVector = Input.mousePosition - screenCenter;
@@ -85,9 +70,11 @@ namespace Radial_UI
         }
         void RespondToMouseInput(int activeElement)
         {
+            
             if (Input.GetMouseButtonDown(0))
             {
-                radialActions[activeElement].Do();
+                if (radialActions[activeElement] != null)
+                    radialActions[activeElement].Do();
             }
         }
 

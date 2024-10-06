@@ -10,7 +10,7 @@ namespace Radial_UI
         private RectTransform rt;
         public Transform target;
         public Vector3 gap;
-        public RadialMenu radialMenu;
+         RadialMenu radialMenu;
         private void Awake()
         {
             rt = GetComponent<RectTransform>();
@@ -22,6 +22,7 @@ namespace Radial_UI
         }
         public void PositionRectTransform()
         {
+            Debug.Log(" position");
             radialMenu.Anim();
             Vector3 center = new Vector3(433, 270, 0);
             Vector3 screenPosition = uiCamera.WorldToScreenPoint(target.position);
