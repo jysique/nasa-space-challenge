@@ -10,7 +10,7 @@ public class MainMenuManager : MonoBehaviour
     //SECOND PANEL
     public const string CREDTIS = "credits";
     public const string PLAY = "play";
-    public const string BACK = "back";
+    public const string BACK_MENU = "back";
 
     public static MainMenuManager instance;
     void Awake()
@@ -45,7 +45,7 @@ public class MainMenuManager : MonoBehaviour
                 OnCredits(); break;
             case PLAY:
                 OnPlay();break;
-            case BACK:
+            case BACK_MENU:
                 OnBack();break;
         }
     }

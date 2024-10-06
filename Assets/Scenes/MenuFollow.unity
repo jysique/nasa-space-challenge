@@ -597,6 +597,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RadialMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 7146454497927529949, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7216614746055287673, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
       propertyPath: m_Interactable
       value: 0
