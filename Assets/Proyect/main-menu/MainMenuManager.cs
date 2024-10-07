@@ -1,6 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     //FIRST PANEL
@@ -8,10 +8,13 @@ public class MainMenuManager : MonoBehaviour
     public const string QUIT = "quit";
 
     //SECOND PANEL
-    public const string CREDTIS = "credits";
+    public const string CREDITS = "credits";
     public const string PLAY = "play";
     public const string BACK = "back";
     public const string BACK_CREDITS = "back_credits";
+    public const string BACK_GALERY = "back_galery";
+    public const string BACK_VIEW = "back_view";
+    public const string FINAL_PLAY = "final_play";
 
     public static MainMenuManager instance;
     void Awake()
@@ -32,29 +35,58 @@ public class MainMenuManager : MonoBehaviour
     public UIPanel mainPanel;
     public UIPanel menuPanel;
     public UIPanel creditsPanel;
+    public UIPanel galleryPanel;
+    public SimpleUIPanel viewEPPanel;
 
     public void BackCreditsPanel() => OnClick(BACK_CREDITS);
+
+    public void GoTutorial()
+    {
+        PlayGood();
+        main_cg.DOFade(0, 0.3f);
+        SceneManager.LoadScene("NASA");
+    }
+
     public void OnClick(string id)
     {
+        
         switch (id)
         {
-
+            case FINAL_PLAY:
+                OnPlay(); 
+                break;
+            case "pegasi":
+                viewEPPanel.View("pegasi");
+                GoViewPlanet();
+                break;
+            case "ogle":
+                viewEPPanel.View("ogle");
+                GoViewPlanet();
+                break;
             case MENU:
                 OnMenu(); break;
             case QUIT:
                 OnQuit();break;
-            case CREDTIS:
-                OnCredits(); break;
+            case CREDITS:
+                GoCredits(); break;
             case PLAY:
-                OnPlay();break;
+                GoGallery(); break;
             case BACK:
-                OnBack();break;
+                GoBack();break;
             case BACK_CREDITS:
-                OnBack2();break;
+                GoBackCredits();break;
+            case BACK_GALERY:
+                GoBackGallery(); break; 
+            case BACK_VIEW:
+                GoBackView(); break;
         }
+        PlayGood();
     }
     void OnMenu()
     {
+        creditsPanel.gameObject.SetActive(false);
+        viewEPPanel.gameObject.SetActive(false);
+        galleryPanel.gameObject.SetActive(false);
         mainPanel.InitExit();
         menuPanel.InitEnter();
         SetActiveTxt(false);
@@ -81,18 +113,41 @@ public class MainMenuManager : MonoBehaviour
         });
         
     }
-    void OnBack2()
+
+    void GoBackView()
     {
-        //credits to main
-        creditsPanel.InitEnter();
-        mainPanel.InitExit();
-        creditsPanel.gameObject.SetActive(true);
-        mainPanel.OnExit(() =>
+        menuPanel.InitEnter();
+        menuPanel.gameObject.SetActive(true);
+        menuPanel.OnEnter(null);
+        viewEPPanel.OnExit(() =>
         {
-            creditsPanel.OnEnter(null);
+            viewEPPanel.gameObject.SetActive(false);
         });
     }
-    void OnBack()
+
+    void GoBackGallery()
+    {
+        menuPanel.InitEnter();
+        menuPanel.gameObject.SetActive(true);
+        menuPanel.OnEnter(null);
+        galleryPanel.OnExit(() =>
+        {
+            galleryPanel.gameObject.SetActive(false);
+        });
+    }
+    void GoBackCredits()
+    {
+        //credits to main
+        
+        menuPanel.InitEnter();
+        menuPanel.gameObject.SetActive(true);
+        menuPanel.OnEnter(null);
+        creditsPanel.OnExit(() =>
+        {
+            creditsPanel.gameObject.SetActive(false);
+        });
+    }
+    void GoBack()
     {
         //main to menu
         mainPanel.InitEnter();
@@ -103,12 +158,54 @@ public class MainMenuManager : MonoBehaviour
             mainPanel.OnEnter(null);
         });
     }
-    void OnCredits()
-    {
 
+
+    void GoViewPlanet()
+    {
+        //view
+        creditsPanel.gameObject.SetActive(false);
+        galleryPanel.gameObject.SetActive(false);
+
+
+        viewEPPanel.gameObject.SetActive(true);
+        menuPanel.InitExit();
+        viewEPPanel.InitEnter();
+
+        SetActiveTxt(false);
+        menuPanel.OnExit(() =>
+        {
+            menuPanel.gameObject.SetActive(false);
+            viewEPPanel.OnEnter(null);
+        });
+    }
+
+    void GoGallery()
+    {
+        //galery
+        creditsPanel.gameObject.SetActive(false);
+        viewEPPanel.gameObject.SetActive(false);
+
+        galleryPanel.gameObject.SetActive(true);
+        menuPanel.InitExit();
+        galleryPanel.InitEnter();
+        
+        SetActiveTxt(false);
+        menuPanel.OnExit(() =>
+        {
+            menuPanel.gameObject.SetActive(false);
+            galleryPanel.OnEnter(null);
+        });
+    }
+    
+    void GoCredits()
+    {
+        galleryPanel.gameObject.SetActive(false);
+        viewEPPanel.gameObject.SetActive(false);
+
+        creditsPanel.gameObject.SetActive(true);
         menuPanel.InitExit();
         creditsPanel.InitEnter();
-        creditsPanel.gameObject.SetActive(true);
+
         SetActiveTxt(false);
         menuPanel.OnExit(() =>
         {
@@ -153,4 +250,18 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
+    public AudioSource audioSource; // Referencia al componente AudioSource
+    public AudioClip god_click; // Referencia al AudioClip del SFX
+    public AudioClip bad_click; // Referencia al AudioClip del SFX
+
+    public void PlayGood()
+    {
+        // Reproducir el AudioClip en una posición específica
+        audioSource.PlayOneShot(god_click);
+    }
+    public void PlayBad()
+    {
+        // Reproducir el AudioClip en una posición específica
+        audioSource.PlayOneShot(bad_click);
+    }
 }

@@ -11,7 +11,7 @@ public class OptionButton : MonoBehaviour
             case MainMenuManager.PLAY:
                 MainMenuManager.instance.ActivateTxtBtns(0);
                 break;
-            case MainMenuManager.CREDTIS:
+            case MainMenuManager.CREDITS:
                 MainMenuManager.instance.ActivateTxtBtns(1);
                 break;
             default:
