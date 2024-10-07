@@ -84,12 +84,13 @@ public class MainMenuManager : MonoBehaviour
     void OnBack2()
     {
         //credits to main
-        creditsPanel.InitEnter();
-        mainPanel.InitExit();
-        creditsPanel.gameObject.SetActive(true);
-        mainPanel.OnExit(() =>
+        
+        menuPanel.InitEnter();
+        menuPanel.gameObject.SetActive(true);
+        menuPanel.OnEnter(null);
+        creditsPanel.OnExit(() =>
         {
-            creditsPanel.OnEnter(null);
+            creditsPanel.gameObject.SetActive(false);
         });
     }
     void OnBack()

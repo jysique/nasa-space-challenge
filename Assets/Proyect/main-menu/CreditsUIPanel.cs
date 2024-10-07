@@ -8,20 +8,26 @@ public class CreditsUIPanel : UIPanel
 
     public Vector3 init_position;
     public Vector3 end_position;
+    Tween tween;
+    bool isDead = false;
     public override void InitEnter()
     {
+        tween.Kill();
+        isDead = false;
         rt_credits.anchoredPosition = init_position;
     }
 
     public override void OnEnter(Action onComplete)
     {
-        rt_credits.DOMoveY(end_position.y,200f).OnComplete(()=>{
-            Debug.Log(" on complet");
-            MainMenuManager.instance.BackCreditsPanel();
+        tween =rt_credits.DOLocalMoveY(end_position.y,5f).OnComplete(()=>{
+            if(!isDead)
+                MainMenuManager.instance.BackCreditsPanel();
         });
     }
     public override void OnExit(Action onComplete)
     {
+        isDead = true;
+        tween.Kill();
         this.gameObject.SetActive(false);
     }
 
