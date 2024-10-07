@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEditor.XR;
 public class DivingMovement : MonoBehaviour
 {
     private int direction = 1;
