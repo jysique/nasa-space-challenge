@@ -58,31 +58,32 @@ public class MainMenuManager : MonoBehaviour
     public void GoTutorial()
     {
         PlayGood();
-        main_cg.DOFade(0, 0.3f);
+        main_cg.DOFade(0, 0.3f).OnComplete(() =>
+        {
+            this.gameObject.SetActive(false);
+        });
         SceneManager.LoadScene("NASA");
     }
 
-    public void GoOgle()
+    public void GoGameplay(string id)
     {
         PlayGood();
-        main_cg.DOFade(0, 0.3f);
-        SceneManager.LoadScene("Ogle");
+        main_cg.DOFade(0, 0.3f).OnComplete(() =>
+        {
+            this.gameObject.SetActive(false);
+        });
+        SceneManager.LoadScene(id);
     }
-    public void GoPegasib()
-    {
-        PlayGood();
-        main_cg.DOFade(0, 0.3f);
-        SceneManager.LoadScene("Pegasi");
-    }
+
+
 
     public void OnClick(string id)
     {
-        Debug.Log("con click " + id);
         switch (id)
         {
             case FINAL_PLAY:
-                OnPlay(); 
-                break;
+              //  OnPlay(); 
+              //  break;
             case "pegasi":
                 viewEPPanel.View("pegasi");
                 GoViewPlanet();
@@ -135,14 +136,7 @@ public class MainMenuManager : MonoBehaviour
         Application.Quit();
 #endif
     }
-    void OnPlay()
-    {
-        main_cg.DOFade(0, 0.3f).OnComplete(() =>
-        {
-            this.gameObject.SetActive(false);
-        });
-        
-    }
+
 
     void GoBackView()
     {
