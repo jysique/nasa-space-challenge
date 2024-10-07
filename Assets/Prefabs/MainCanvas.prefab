@@ -521,8 +521,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6142390247060645934}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 5
+        m_MethodName: GoOgle
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4322,8 +4322,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6142390247060645934}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: OnClick
-        m_Mode: 5
+        m_MethodName: GoPegasib
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4996,6 +4996,8 @@ GameObject:
   - component: {fileID: 6142390246087186545}
   - component: {fileID: 6142390246087186559}
   - component: {fileID: 5056272017582641598}
+  - component: {fileID: 253964658}
+  - component: {fileID: 253964659}
   m_Layer: 5
   m_Name: circle (5)
   m_TagString: Untagged
@@ -5093,7 +5095,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -5130,6 +5132,40 @@ MonoBehaviour:
           m_StringArgument: play
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &253964658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142390246087186547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecef85d79b8ab0429ba3444786313a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: play
+--- !u!95 &253964659
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142390246087186547}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cc171b5363bc5a8478dfd848e8e9a4f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6142390246099697418
 GameObject:
   m_ObjectHideFlags: 0
@@ -5315,7 +5351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6142390246191938200
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6603,6 +6639,8 @@ GameObject:
   - component: {fileID: 6142390247220285486}
   - component: {fileID: 6142390247220285484}
   - component: {fileID: 4939096901863857996}
+  - component: {fileID: 609809845}
+  - component: {fileID: 609809846}
   m_Layer: 5
   m_Name: circle (4)
   m_TagString: Untagged
@@ -6700,7 +6738,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -6737,6 +6775,40 @@ MonoBehaviour:
           m_StringArgument: credits
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &609809845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142390247220285472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ecef85d79b8ab0429ba3444786313a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: credits
+--- !u!95 &609809846
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6142390247220285472}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cc171b5363bc5a8478dfd848e8e9a4f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6142390247251816156
 GameObject:
   m_ObjectHideFlags: 0
@@ -9387,7 +9459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4092776050649653228
 RectTransform:
   m_ObjectHideFlags: 0
