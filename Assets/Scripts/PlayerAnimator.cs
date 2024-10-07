@@ -24,12 +24,14 @@ public class PlayerAnimator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        changeShape = true;
+        //changeShape = true;
+
         pm = transform.parent.GetComponent<PlayerMovement>();
         currentState = "Idle";
         SetCharacterState(currentState);
 
-        var firstTrackEntry = skeletonAnimation.state.SetAnimation(0, activate, false);
+        var firstTrackEntry = skeletonAnimation.state.SetAnimation(0, activate, false); 
+
 
         // Registrar un callback para que al terminar la primera animación se reproduzca la segunda
         firstTrackEntry.Complete += (trackEntry) =>
@@ -40,9 +42,51 @@ public class PlayerAnimator : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        skeletonAnimation.state.SetAnimation(0, activate, false).Complete += (trackEntry) =>
+        {
+            changeShape = false;
+            SetCharacterState(currentState);
+        };
+    }
+    private void OnDisable()
+    {
+        changeShape = true;
+    }
+
+
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (changeShape)
+            {
+                print("close menu");
+
+                var firstTrackEntry = skeletonAnimation.state.SetAnimation(0, activate, false);
+
+
+                // Registrar un callback para que al terminar la primera animación se reproduzca la segunda
+                firstTrackEntry.Complete += (trackEntry) =>
+                {
+                    changeShape = false;
+                    SetCharacterState("Run");
+                };
+            }
+            else
+            {
+                changeShape = true;
+                skeletonAnimation.state.SetAnimation(0, deactivate, false);
+            }
+            
+        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    changeShape = false;
+        //    //SetCharacterState(currentState);
+        //}
         moveInput.x = Input.GetAxisRaw("Horizontal");
         if (!changeShape)
         {
@@ -74,6 +118,8 @@ public class PlayerAnimator : MonoBehaviour
         skeletonAnimation.state.SetAnimation(0, animation, loop).TimeScale = timeScale;
         currentAnimation = animation.name;
     }
+
+
     public void SetCharacterState(string state)
     {
         if (state.Equals("Jump"))

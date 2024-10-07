@@ -16,7 +16,6 @@ public class HudManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
     }
     void Awakee()
     {
@@ -33,11 +32,28 @@ public class HudManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            if (radialMenu.gameObject.activeInHierarchy) {
+            if (radialMenu.gameObject.activeInHierarchy)
+            {
                 Time.timeScale = 1;
-            } 
+
+            }
             active = !active;
             radialMenu.gameObject.SetActive(active);
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (radialMenu.gameObject.activeInHierarchy)
+            {
+                Time.timeScale = 1;
+                Invoke("TurnOffMenu", 0.3f);
+
+            }
+        }
+    }
+    void TurnOffMenu()
+    {
+        active = false;
+        radialMenu.gameObject.SetActive(false);
     }
 }

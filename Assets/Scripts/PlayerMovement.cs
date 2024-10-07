@@ -79,7 +79,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AnimationCurve animCurve;
 
     [Header("Shape")]
-    [SerializeField] private int playerShape = 0;
     public string PlayerShape = "Earth";
     public GameObject earthShape;
     public GameObject airShape;
@@ -103,14 +102,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 newCenterOfMass = new Vector2(0, -0.5f); // Ajusta según el tamaño de tu sprite
         rb.centerOfMass = newCenterOfMass;
         //plm = GetComponent<PlayerLadderMovement>();
-        if(playerShape == 0)
-        {
-            SetValues();
-        }
-        else
-        {
-            SetAirValues();
-        }
+        SetValues();
         
     }
 
@@ -149,11 +141,7 @@ public class PlayerMovement : MonoBehaviour
             OnJumpUp();
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            ChangeShape();
-            //KillPlayer();
-        }
+        
         #endregion
 
         #region Grounded
@@ -166,12 +154,12 @@ public class PlayerMovement : MonoBehaviour
         else { Grounded = false; }
         #endregion
 
-        switch (playerShape)
+        switch (PlayerShape)
         {
-            case 0:
+            case "Earth":
                 EarthController();
                 break;
-            case 1:
+            case "Air":
                 AirController();
                 break;
 
@@ -184,25 +172,14 @@ public class PlayerMovement : MonoBehaviour
         //LimitCarRotation();
     }
 
-    private void ChangeShape()
+    public void ChangeShapeEarth()
     {
-        playerShape++;
-        if (playerShape >= playerMaxShapes)
-        {
-            playerShape = 0;
-        }
-        switch (playerShape)
-        {
-            case 0:
-                SetValues();
-                break;
-            case 1:
-                SetAirValues();
-                break;
-
-
-
-        }
+        SetValues();
+        
+    }
+    public void ChangeShapeAir()
+    {
+        SetAirValues();
     }
     private void EarthController()
     {
@@ -302,7 +279,7 @@ public class PlayerMovement : MonoBehaviour
         #region Movement
 
         //if (!plm.IsClimbing)
-        if (!(playerShape==1&&grounded))
+        if (!(PlayerShape=="Air"&&grounded))
         {
             float targetSpeed = moveInput.x * runMaxSpeed;
             //print("target speed: " + targetSpeed);
@@ -335,14 +312,7 @@ public class PlayerMovement : MonoBehaviour
 
             float movement = speedDif * accelRate;
             //print(movement);
-            if(playerShape == 1)
-            {
-                if (grounded)
-                {
-                    movement = 0;
-                    print("no move");
-                }
-            }
+            
 
 
             rb.AddForce(movement * Vector2.right, ForceMode2D.Force);
