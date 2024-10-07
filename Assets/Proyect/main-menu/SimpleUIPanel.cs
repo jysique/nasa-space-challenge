@@ -12,15 +12,14 @@ public class SimpleUIPanel : UIPanel
     public GameObject play;
     public GameObject txt_ogle;
     public GameObject txt_pegasi;
+    string id;
     public void View(string id)
     {
         ogle_container.SetActive(false);
         pegasi_container.SetActive(false);
 
-        
-
-
-        Debug.Log(" simple view " + id);
+        this.id = id;
+        //Debug.Log(" simple view " + id);
         switch (id)
         {
             case "ogle":
@@ -30,6 +29,11 @@ public class SimpleUIPanel : UIPanel
                 pegasi_container.SetActive(true);
                 break;
         }
+    }
+    public void Go()
+    {
+        string scene = id == "pegasi" ? "Pegasi" : "Ogle";
+        MainMenuManager.instance.GoGameplay(scene);
     }
     public void Show(string id)
     {
