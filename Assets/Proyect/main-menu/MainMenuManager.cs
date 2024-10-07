@@ -1,6 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
     //FIRST PANEL
@@ -39,6 +39,14 @@ public class MainMenuManager : MonoBehaviour
     public SimpleUIPanel viewEPPanel;
 
     public void BackCreditsPanel() => OnClick(BACK_CREDITS);
+
+    public void GoTutorial()
+    {
+        PlayGood();
+        main_cg.DOFade(0, 0.3f);
+        SceneManager.LoadScene("NASA");
+    }
+
     public void OnClick(string id)
     {
         
