@@ -19,7 +19,7 @@ public class CreditsUIPanel : UIPanel
 
     public override void OnEnter(Action onComplete)
     {
-        tween =rt_credits.DOLocalMoveY(end_position.y,12f).OnComplete(()=>{
+        tween =rt_credits.DOLocalMoveY(end_position.y,20f).OnComplete(()=>{
             if(!isDead)
                 MainMenuManager.instance.BackCreditsPanel();
         });

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
@@ -22,22 +23,36 @@ public class MainMenuManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            main_cg = GetComponent<CanvasGroup>();
+            Awakee();
         }
         else if (instance != this)
         {
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject);
-    }
 
+    }
+    void Awakee()
+    {
+        main_cg = GetComponent<CanvasGroup>();
+        loading.SetActive(PlayerPrefs.GetInt("selection") == 1);
+    }
+    private void Start()
+    {
+        if(PlayerPrefs.GetInt("selection") == 1)
+        {
+            loading.SetActive(false);
+            mainPanel.gameObject.SetActive(false);
+            OnClick(PLAY);
+            SaveManager.instance.ResetSelection();
+        }
+    }
     CanvasGroup main_cg;
     public UIPanel mainPanel;
     public UIPanel menuPanel;
     public UIPanel creditsPanel;
     public UIPanel galleryPanel;
     public SimpleUIPanel viewEPPanel;
-
+    public GameObject loading;
     public void BackCreditsPanel() => OnClick(BACK_CREDITS);
 
     public void GoTutorial()
@@ -49,7 +64,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClick(string id)
     {
-        
+        Debug.Log("con click " + id);
         switch (id)
         {
             case FINAL_PLAY:
@@ -127,6 +142,9 @@ public class MainMenuManager : MonoBehaviour
 
     void GoBackGallery()
     {
+
+        mainPanel.gameObject.SetActive(false);
+
         menuPanel.InitEnter();
         menuPanel.gameObject.SetActive(true);
         menuPanel.OnEnter(null);

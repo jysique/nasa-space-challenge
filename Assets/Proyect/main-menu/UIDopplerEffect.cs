@@ -9,7 +9,7 @@ public class UIDopplerEffect : MonoBehaviour
     Image targetImage; // La imagen a la que le aplicaremos el efecto Doppler
     public float duration = 1f; // Duración del efecto Doppler
    
-    void Start()
+    void Awake()
     {
         targetImage = GetComponent<Image>();
     }
@@ -17,6 +17,10 @@ public class UIDopplerEffect : MonoBehaviour
     bool in_doppler = false;
     public void Init(float initscale)
     {
+        if(targetImage == null)
+        {
+            targetImage = GetComponent<Image>();
+        }
         targetImage.transform.localScale = Vector3.one * initscale;
     }
     public void StartDopplerEffect(float scaleTo)
