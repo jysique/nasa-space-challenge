@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class WinCondition : MonoBehaviour
 {
@@ -30,14 +31,19 @@ public class WinCondition : MonoBehaviour
         uiCounter.text = counter + "/" + maxCounter;
         if (counter == maxCounter)
         {
+            Invoke("WinGame", 4);
             
-            print("GANASTE!!!!");
-            //CONECTAR A ESCENA PRINCIPAL
-            fade.DOFade(1f, 1f).OnComplete(()=> {
-                //CONECTAR A ESCENA PRINCIPAL
-            });
 
         }
+    }
+    private void WinGame()
+    {
+        print("GANASTE!!!!");
+        //CONECTAR A ESCENA PRINCIPAL
+        fade.DOFade(1f, 1f).OnComplete(() => {
+            //CONECTAR A ESCENA PRINCIPAL
+            SceneManager.LoadScene("MainMenu");
+        });
     }
 
 
