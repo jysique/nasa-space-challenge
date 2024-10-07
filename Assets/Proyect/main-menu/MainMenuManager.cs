@@ -62,6 +62,19 @@ public class MainMenuManager : MonoBehaviour
         SceneManager.LoadScene("NASA");
     }
 
+    public void GoOgle()
+    {
+        PlayGood();
+        main_cg.DOFade(0, 0.3f);
+        SceneManager.LoadScene("Ogle");
+    }
+    public void GoPegasib()
+    {
+        PlayGood();
+        main_cg.DOFade(0, 0.3f);
+        SceneManager.LoadScene("Pegasi");
+    }
+
     public void OnClick(string id)
     {
         Debug.Log("con click " + id);
@@ -103,6 +116,8 @@ public class MainMenuManager : MonoBehaviour
         viewEPPanel.gameObject.SetActive(false);
         galleryPanel.gameObject.SetActive(false);
         mainPanel.InitExit();
+
+        menuPanel.gameObject.SetActive(true);
         menuPanel.InitEnter();
         SetActiveTxt(false);
         mainPanel.OnExit(() =>
@@ -237,8 +252,14 @@ public class MainMenuManager : MonoBehaviour
     public CanvasGroup[] cg_texts;
     CanvasGroup current_cg;
     float time_btns = 0.2f;
+    int current_index = -1;
     public void ActivateTxtBtns(int index)
     {
+        if(index == current_index)
+        {
+            return;
+        }
+        current_index = index;
         if (current_cg != null)
         {
             current_cg.DOFade(0, time_btns).OnComplete(() =>

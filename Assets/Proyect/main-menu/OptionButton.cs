@@ -3,7 +3,7 @@ using UnityEngine;
 public class OptionButton : MonoBehaviour
 {
     public string id;
-
+    
     public void OnEndHighlight()
     {
         switch (id)
