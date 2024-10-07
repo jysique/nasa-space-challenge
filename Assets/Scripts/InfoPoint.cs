@@ -18,6 +18,8 @@ public class InfoPoint : MonoBehaviour
     public float scaleAmount = 1.05f;  // Cantidad de aumento en la escala
     private Tween scaleTween;  // Para almacenar la animación de escala
 
+    public bool collected = false;
+
     private void Start()
     {
         // Inicializar el canvasGroup como invisible
@@ -44,6 +46,11 @@ public class InfoPoint : MonoBehaviour
 
             // Hacer fade in del CanvasGroup
             canvasGroup.DOFade(1f, fadeDuration);
+            if (!collected)
+            {
+                collected = true;
+                WinCondition.instance.AddCounter();
+            }
         }
     }
 
