@@ -42,7 +42,12 @@ public class WinCondition : MonoBehaviour
         //CONECTAR A ESCENA PRINCIPAL
         fade.DOFade(1f, 1f).OnComplete(() => {
             //CONECTAR A ESCENA PRINCIPAL
+            if(SaveManager.instance != null)
+            {
+                SaveManager.instance.SaveSelection();
+            }
             SceneManager.LoadScene("MainMenu");
+            
         });
     }
 
