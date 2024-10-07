@@ -20,6 +20,12 @@ public class PlayerAnimator : MonoBehaviour
 
     public bool air;
 
+
+    //sfx
+    public AudioSource aSource;
+    public AudioSource carLoop;
+    public AudioClip transformerSound;
+
     [SerializeField] private bool changeShape;
     // Start is called before the first frame update
     void Start()
@@ -44,8 +50,10 @@ public class PlayerAnimator : MonoBehaviour
 
     private void OnEnable()
     {
+        aSource.PlayOneShot(transformerSound);
         skeletonAnimation.state.SetAnimation(0, activate, false).Complete += (trackEntry) =>
         {
+            
             changeShape = false;
             SetCharacterState(currentState);
         };
@@ -88,6 +96,11 @@ public class PlayerAnimator : MonoBehaviour
         //    //SetCharacterState(currentState);
         //}
         moveInput.x = Input.GetAxisRaw("Horizontal");
+        if (!air)
+        {
+            var maxVolume = .2f;
+            carLoop.volume = maxVolume * Mathf.Abs(moveInput.x);
+        }
         if (!changeShape)
         {
             if (!pm.Grounded && !air)
