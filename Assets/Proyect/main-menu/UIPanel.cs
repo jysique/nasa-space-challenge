@@ -15,7 +15,7 @@ public class UIPanel : MonoBehaviour
 
     
     float general_delay;
-    public void InitEnter()
+    public virtual void InitEnter()
     {
         foreach (var item in effect)
         {
@@ -23,7 +23,7 @@ public class UIPanel : MonoBehaviour
         }
         SetActiveParticles(false);
     }
-    public void InitExit()
+    public virtual void InitExit()
     {
         foreach (var item in effect)
         {
@@ -31,7 +31,7 @@ public class UIPanel : MonoBehaviour
         }
         
     }
-    public void OnEnter(System.Action onComplete)
+    public virtual void OnEnter(System.Action onComplete)
     {
         cg_panel.DOFade(1, 0.3f).OnComplete(() =>
         {
@@ -45,7 +45,7 @@ public class UIPanel : MonoBehaviour
       
     }
 
-    public void OnExit(System.Action onComplete)
+    public virtual void OnExit(System.Action onComplete)
     {
 
         StartDoppler( effect,2, () =>

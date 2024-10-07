@@ -444,7 +444,7 @@ Canvas:
   m_GameObject: {fileID: 1608273420}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 296693102}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -498,11 +498,23 @@ PrefabInstance:
     m_TransformParent: {fileID: 1608273424}
     m_Modifications:
     - target: {fileID: 7146454497927529944, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1608273423}
+    - target: {fileID: 7146454497927529944, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 604378858}
     - target: {fileID: 7146454497927529944, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
       propertyPath: uiCamera
+      value: 
+      objectReference: {fileID: 296693102}
+    - target: {fileID: 7146454497927529944, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
+      propertyPath: uiElement
+      value: 
+      objectReference: {fileID: 1452345036}
+    - target: {fileID: 7146454497927529944, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
+      propertyPath: mainCamera
       value: 
       objectReference: {fileID: 296693102}
     - target: {fileID: 7146454497927529946, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
