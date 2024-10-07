@@ -31,8 +31,11 @@ public class HudManager : MonoBehaviour
     }
     void RespondToSpaceInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(1))
         {
+            if (radialMenu.gameObject.activeInHierarchy) {
+                Time.timeScale = 1;
+            } 
             active = !active;
             radialMenu.gameObject.SetActive(active);
         }

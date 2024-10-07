@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 namespace Radial_UI
 {
@@ -35,7 +36,14 @@ namespace Radial_UI
         {
 
         }
-        
+        private void OnEnable()
+        {
+            foreach (var rings in radial_rings)
+            {
+                rings.GetComponent<Button>().OnDeselect(null);
+            }
+        }
+
         public void Anim() {
             
             //cg.interactable = false;

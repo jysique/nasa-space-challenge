@@ -255,7 +255,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 8
+  m_Mass: 5
   m_LinearDrag: 0
   m_AngularDrag: 1
   m_GravityScale: 1
@@ -527,9 +527,9 @@ MonoBehaviour:
   skeletonAnimation: {fileID: 389205890}
   idle: {fileID: 11400000, guid: bda9079e93e31ff448cdc969c7ec0595, type: 2}
   run: {fileID: 11400000, guid: 8a1065ccbc1dfdb4d8a27cfb6fa6f01d, type: 2}
-  jump: {fileID: 11400000, guid: 8a1065ccbc1dfdb4d8a27cfb6fa6f01d, type: 2}
-  activate: {fileID: 0}
-  deactivate: {fileID: 0}
+  jump: {fileID: 11400000, guid: bda9079e93e31ff448cdc969c7ec0595, type: 2}
+  activate: {fileID: 11400000, guid: 2ae8b3cbfd30a4b41bbdf821799f3400, type: 2}
+  deactivate: {fileID: 11400000, guid: cebf611001c90754487c21af5b1e5187, type: 2}
   currentState: 
   currentAnimation: 
   air: 1
@@ -5827,14 +5827,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1568483412}
     m_Modifications:
+    - target: {fileID: 1132754323501301748, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3476848031391522609, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3885774044249626058, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7146454497927529944, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
       propertyPath: gap.x
-      value: 60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7146454497927529944, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
       propertyPath: gap.y
-      value: 90
+      value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7146454497927529944, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1568483411}
     - target: {fileID: 7146454497927529944, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
       propertyPath: target
       value: 
@@ -5934,6 +5950,14 @@ PrefabInstance:
     - target: {fileID: 7146454497927529949, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7374440943556216235, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9220005478630233170, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
+      propertyPath: m_UpdateMode
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3670ac4ea04d8fc468cf8ee77e64997d, type: 3}
@@ -6334,7 +6358,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dd20cc71ec3be0d4bb22350bddc31448, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 49f5eef12d0860449818a193ae85dc8f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -6484,12 +6508,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -6526,7 +6550,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1864971833}
   m_Father: {fileID: 0}

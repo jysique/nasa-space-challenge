@@ -76,13 +76,13 @@ namespace Radial_UI
 
             bg_standar.transform.localScale = Vector3.zero;
 
-            bg_standar.transform.DOLocalMove(final_pos_bg, 0.3f).SetEase(Ease.OutQuad);
+            bg_standar.transform.DOLocalMove(final_pos_bg, 0.3f).SetEase(Ease.OutQuad).SetUpdate(true);
 
             bg_standar.transform.DOScale(1f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
             {
                 icon_standar.gameObject.SetActive(true);
                 if (active) onComplete?.Invoke();
-            });
+            }).SetUpdate(true);
         }
     }
 

@@ -9,6 +9,7 @@ namespace Radial_UI
         public Camera uiCamera;
         private RectTransform rt;
         public Transform target;
+        public Canvas canvas;
         public Vector3 gap;
          RadialMenu radialMenu;
         private void Awake()
@@ -22,11 +23,22 @@ namespace Radial_UI
         }
         public void PositionRectTransform()
         {
+            Time.timeScale = 0.01f;
             Debug.Log(" position");
             radialMenu.Anim();
-            Vector3 center = new Vector3(433, 270, 0);
-            Vector3 screenPosition = uiCamera.WorldToScreenPoint(target.position);
-            rt.localPosition = screenPosition - center + gap;
+            // Convertir la posición del objeto en coordenadas de pantalla
+            Vector3 screenPos = uiCamera.WorldToScreenPoint(target.position + gap);
+
+            // Si el objeto está delante de la cámara
+            if (screenPos.z > 0)
+            {
+                Vector2 anchoredPos;
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    canvas.transform as RectTransform, screenPos, canvas.worldCamera, out anchoredPos);
+
+                // Mover el UI al lugar correspondiente dentro del canvas
+                rt.anchoredPosition = anchoredPos;
+            }
         }
         public Vector3 GetWorldPositionFromRect(RectTransform rt)
         {
