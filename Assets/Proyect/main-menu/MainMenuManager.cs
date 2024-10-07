@@ -10,7 +10,8 @@ public class MainMenuManager : MonoBehaviour
     //SECOND PANEL
     public const string CREDTIS = "credits";
     public const string PLAY = "play";
-    public const string BACK_MENU = "back";
+    public const string BACK = "back";
+    public const string BACK_CREDITS = "back_credits";
 
     public static MainMenuManager instance;
     void Awake()
@@ -30,8 +31,9 @@ public class MainMenuManager : MonoBehaviour
     CanvasGroup main_cg;
     public UIPanel mainPanel;
     public UIPanel menuPanel;
+    public UIPanel creditsPanel;
 
-    
+    public void BackCreditsPanel() => OnClick(BACK_CREDITS);
     public void OnClick(string id)
     {
         switch (id)
@@ -45,8 +47,10 @@ public class MainMenuManager : MonoBehaviour
                 OnCredits(); break;
             case PLAY:
                 OnPlay();break;
-            case BACK_MENU:
+            case BACK:
                 OnBack();break;
+            case BACK_CREDITS:
+                OnBack2();break;
         }
     }
     void OnMenu()
@@ -77,8 +81,20 @@ public class MainMenuManager : MonoBehaviour
         });
         
     }
+    void OnBack2()
+    {
+        //credits to main
+        creditsPanel.InitEnter();
+        mainPanel.InitExit();
+        creditsPanel.gameObject.SetActive(true);
+        mainPanel.OnExit(() =>
+        {
+            creditsPanel.OnEnter(null);
+        });
+    }
     void OnBack()
     {
+        //main to menu
         mainPanel.InitEnter();
         menuPanel.InitExit();
         mainPanel.gameObject.SetActive(true);
@@ -89,7 +105,17 @@ public class MainMenuManager : MonoBehaviour
     }
     void OnCredits()
     {
-        Debug.Log(" on credtis");
+
+        menuPanel.InitExit();
+        creditsPanel.InitEnter();
+        creditsPanel.gameObject.SetActive(true);
+        SetActiveTxt(false);
+        menuPanel.OnExit(() =>
+        {
+            menuPanel.gameObject.SetActive(false);
+            creditsPanel.OnEnter(null);
+        });
+
     }
     // animation
     

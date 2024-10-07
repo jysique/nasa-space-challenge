@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+
 
 namespace Radial_UI
 {
@@ -31,11 +33,14 @@ namespace Radial_UI
         {
             //cg = GetComponent<CanvasGroup>();
         }
-        private void Start()
+        private void OnEnable()
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+        private void OnDisable()
         {
 
         }
-        
         public void Anim() {
             
             //cg.interactable = false;
@@ -51,11 +56,7 @@ namespace Radial_UI
         }
         private void Update()
         {
-            //if (!active) return;
-            //int activeElement = GetActiveElement();
 
-            //HighLightActiveElement(activeElement);
-            //RespondToMouseInput(activeElement);
         }
         int GetActiveElement()
         {

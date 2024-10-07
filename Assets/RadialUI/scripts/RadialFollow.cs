@@ -6,33 +6,27 @@ namespace Radial_UI
 {
     public class RadialFollow : MonoBehaviour
     {
-        public Camera uiCamera;
-        private RectTransform rt;
-        public Transform target;
-        public Vector3 gap;
-         RadialMenu radialMenu;
-        private void Awake()
+        public RectTransform uiElement;  // El menú o UI que queremos que siga al objeto
+        public Transform target;         // El objeto que queremos seguir
+        public Camera mainCamera;        // La cámara desde donde se calcularán las coordenadas de pantalla
+        public Canvas canvas;            // El canvas donde se encuentra la UI
+        public Vector3 offset;           // Offset para ajustar la posición en la UI
+
+        void Update()
         {
-            rt = GetComponent<RectTransform>();
-            radialMenu = GetComponent<RadialMenu>();
-        }
-        private void OnEnable()
-        {
-            PositionRectTransform();
-        }
-        public void PositionRectTransform()
-        {
-            Debug.Log(" position");
-            radialMenu.Anim();
-            Vector3 center = new Vector3(433, 270, 0);
-            Vector3 screenPosition = uiCamera.WorldToScreenPoint(target.position);
-            rt.localPosition = screenPosition - center + gap;
-        }
-        public Vector3 GetWorldPositionFromRect(RectTransform rt)
-        {
-            Vector3[] worldCorners = new Vector3[4];
-            rt.GetWorldCorners(worldCorners);
-            return worldCorners[0];
+            // Convertir la posición del objeto en coordenadas de pantalla
+            Vector3 screenPos = mainCamera.WorldToScreenPoint(target.position + offset);
+
+            // Si el objeto está delante de la cámara
+            if (screenPos.z > 0)
+            {
+                Vector2 anchoredPos;
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    canvas.transform as RectTransform, screenPos, canvas.worldCamera, out anchoredPos);
+
+                // Mover el UI al lugar correspondiente dentro del canvas
+                uiElement.anchoredPosition = anchoredPos;
+            }
         }
     }
 
